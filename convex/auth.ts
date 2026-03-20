@@ -6,6 +6,7 @@ import { components } from "./_generated/api";
 import { query } from "./_generated/server";
 import type { GenericCtx } from "@convex-dev/better-auth";
 import type { DataModel } from "./_generated/dataModel";
+import { anonymous } from "better-auth/plugins/anonymous";
 
 const siteUrl = process.env.SITE_URL!;
 
@@ -30,9 +31,13 @@ export const createAuth = (ctx: GenericCtx<DataModel>) => {
         prompt: "select_account consent",
       },
     },
+    anonymous: {
+      enabled: true,
+    },
     plugins: [
       // The Convex plugin is required for Convex compatibility
       convex({ authConfig }),
+      anonymous(),
     ],
   });
 };

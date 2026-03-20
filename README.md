@@ -34,6 +34,8 @@ This project uses [Tailwind CSS](https://tailwindcss.com/) for styling.
 ## Setting up Convex
 
 - Set the `VITE_CONVEX_URL` and `CONVEX_DEPLOYMENT` environment variables in your `.env.local`. (Or run `npx convex init` to set them automatically.)
+- Set the secret `npx convex env set BETTER_AUTH_SECRET=$(openssl rand -base64 32)`
+- Set the client `npx convex env set SITE_URL http://localhost:3000`
 - Run `npx convex dev` to start the Convex server.
 
 

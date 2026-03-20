@@ -1,16 +1,20 @@
 import { authClient } from "@/lib/auth-client";
-import { useConvexQuery } from "@convex-dev/react-query";
-import { createFileRoute, useRouter } from "@tanstack/react-router";
-import { api } from "convex/_generated/api";
-import { Route as AuthRoute } from "./route";
+import { getCurrentUserFromServer } from "@/serverFn/auth-serverFn";
+import { createFileRoute, redirect, useRouter } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_auth/dashboard")({
   component: RouteComponent,
-  ssr: false,
+  loader: async () => {
+    const userData = await getCurrentUserFromServer();
+    // if (!userData) throw redirect({ to: "/login" });
+    return userData;
+  }
 });
 
 function RouteComponent() {
   const router = useRouter();
+  const data = Route.useLoaderData();
+  console.log(data)
   const { signOut } = authClient;
   const handleLogout = async () => {
     await signOut();

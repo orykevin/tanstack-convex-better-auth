@@ -9,11 +9,11 @@ export const Route = createFileRoute("/login")({
 function RouteComponent() {
   const { signIn } = authClient;
   const handleSignIn = () => {
-    signIn.social({ provider: "google" });
+    signIn.anonymous();
   };
   return (
     <div>
-      <button onClick={handleSignIn}>Login via google</button>
+      <button onClick={handleSignIn}>Login via anonymous</button>
     </div>
   );
 }
